@@ -43,6 +43,8 @@ module ActiveModelSerializers
       # ref https://github.com/rails/rails/pull/21496
       ActionController::Renderers.add :jsonapi do |json, options|
         puts "*** #{serialize_jsonapi(json, options).class}"
+        puts "*** as_json: #{serialize_jsonapi(json, options).as_json()}"
+        puts "*** to_json: #{serialize_jsonapi(json, options).to_json(options)}"
         json = serialize_jsonapi(json, options).to_json(options) unless json.is_a?(String)
         self.content_type ||= Mime[:jsonapi]
         self.response_body = json
